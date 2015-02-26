@@ -1,0 +1,38 @@
+<section class="Action_and_Adventure_Page">
+
+    <div id="gameTiles" class="row">
+
+
+        <div>
+
+            <h1 id="CategoryName" style="font-family: pacificoregular; color: #0c97e2; text-align: center">Action & Adventure Games</h1>
+
+            <hr>
+
+
+            <div ng-repeat = "newGame in myGamesList | filter:searchVar.category = 'Action & Adventure':true">
+                <!--<p>{{myGamesList.indexOf(newGame)}}</p>-->
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <div>
+                                <img src="{{newGame.thumbnail}}" alt="">
+                            </div>
+                            <div class="caption"ng-class="{'dark' : showmeLight}">
+                                <h4 class="pull-right" ng-class="{'dark' : showmeLight}">{{newGame.price}}</h4>
+                                <h4><a ng-style="{'font-size': nameSize((newGame.name | removeSubName).length)}" class="categoryGameName" href="#details/{{myGamesList.indexOf(newGame)}}">{{newGame.name | removeSubName}}</a>
+                                </h4>
+                                <p ng-class="{'dark' : showmeLight}">{{newGame.description}}</p>
+                            </div>
+                            <div id="ratingDiv" style="padding-left: 8px; padding-right: 8px; padding-bottom: 5px;" ng-class="{'dark' : showmeLight}">
+                                <div style="display: inline-block" ng-bind-html="getTrustedHtml(newGame)"></div>
+                                <p class="pull-right" style="color: #d17581">{{newGame.numberReviews}} reviews</p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

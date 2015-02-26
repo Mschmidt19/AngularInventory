@@ -1,0 +1,44 @@
+<section class="cartPage">
+
+    <h1 id="CategoryName" style="font-family: pacificoregular; color: #0c97e2; text-align: center">My Cart</h1>
+    <hr>
+
+
+    <div ng-repeat = "newGame in cartArray" class="disappear">
+        <div>
+            <div class="col-sm-11 col-lg-11 col-md-11 cartGameDiv">
+                <div class="thumbnail">
+                    <div class="pull-left" ng-class="{'dark' : showmeLight}">
+                        <img style="height: 100px; width: 213px; padding: 5px; margin-top: 5px" src="{{newGame.thumbnail}}" alt="">
+                        <div id="ratingDiv" style="padding-left: 8px; padding-right: 8px; padding-bottom: 5px;" ng-class="{'dark' : showmeLight}">
+                            <div style="display: inline-block" ng-bind-html="getTrustedHtml(newGame)"></div>
+                            <p class="pull-right" style="color: #d17581" ng-class="{'dark' : showmeLight}">{{newGame.numberReviews}} reviews</p>
+                        </div>
+                    </div>
+                    <div class="caption" ng-class="{'dark' : showmeLight}">
+                        <h4 style="margin-top: 0" class="pull-right" ng-class="{'dark' : showmeLight}">{{newGame.price}}</h4>
+                        <h4 style="margin-top: 0"><a class="categoryGameName" href="#details/{{myGamesList.indexOf(newGame)}}">{{newGame.name | removeSubName}}</a>
+                        </h4>
+                        <p ng-class="{'dark' : showmeLight}">{{newGame.description.substring(0,290) + '...'}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1 col-lg-1 col-md-1 cartGameDiv">
+            <img style="margin-bottom: 10px; margin-top: 10px;" src="images/glyphIconCheckmark.png" alt=""/>
+            <img ng-click="removeFromCart(newGame)" style="margin-bottom: 10px" src="images/glyphIconRemoveGame.png" alt=""/>
+            <img src="images/glyphIconLike.png" alt=""/>
+        </div>
+    </div>
+
+    <table class="pull-right" style="margin-right: 93px">
+        <tr height="30" ng-class="{'dark' : showmeLight}"><td style="text-align: right"><strong>SubTotal: &nbsp; </strong></td><td><h4>${{(computeSubTotal(cartArray).toFixed(2))}}</h4></td></tr>
+        <tr height="30" ng-class="{'dark' : showmeLight}"><td style="text-align: right"><strong>Tax: &nbsp; </strong></td><td><h4>${{((computeSubTotal(cartArray)*0.075).toFixed(2))}}</h4></td></tr>
+        <tr height="30" ng-class="{'dark' : showmeLight}"><td style="text-align: right; font-size: 16px"><strong>GrandTotal: &nbsp; </strong></td><td><h4>${{((computeSubTotal(cartArray)) + ((computeSubTotal(cartArray)*0.075))).toFixed(2)}}</h4></td></tr>
+
+    </table>
+
+</section>
+
+
+<!--;-->

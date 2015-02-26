@@ -1,0 +1,103 @@
+<section class="detailsPage">
+
+    <div id="individualGame" class="row" ng-class="{'dark' : showmeLight}">
+
+        <h1 class="GameName" style="font-family: pacificoregular; color: #0c97e2; text-align: center">{{myGamesList[$rootScope.itemId].name}}</h1>
+
+        <div class="blankSpace"></div>
+
+        <div class="row carousel-holder">
+
+            <div class="col-md-12">
+                <div id="individualGameBanner" class="carousel slide" data-ride="carousel">
+
+                    <div class="carousel-inner">
+                        <div id = "individualGameHeaderImage" class="item active">
+                            <img class="slide-image" src="{{myGamesList[$rootScope.itemId].banner}}" alt="">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row" ng-class="{'dark' : showmeLight}">
+
+            <h3 id="Information" style="font-family: pacificoregular; color: #0c97e2; text-align: center">Information</h3>
+
+            <div class="blankSpace"></div>
+
+            <div class="col-sm-4 col-lg-4 col-md-4" ng-class="{'dark' : showmeLight}">
+                <div class="thumbnail" ng-class="{'dark' : showmeLight}">
+                    <h3 ng-class="{'dark' : showmeLight}">Name:</h3>
+                    <p class="GameName" ng-class="{'dark' : showmeLight}">
+                        {{myGamesList[$rootScope.itemId].name}}
+                    </p>
+                    <h3 ng-class="{'dark' : showmeLight}">Category:</h3>
+                    <p id="GameCategory" ng-class="{'dark' : showmeLight}">
+                        {{myGamesList[$rootScope.itemId].category}}
+                    </p>
+                    <h3 ng-class="{'dark' : showmeLight}">Developer:</h3>
+                    <p id="GameCompany" ng-class="{'dark' : showmeLight}">
+                        {{myGamesList[$rootScope.itemId].developer}}
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-sm-4 col-lg-4 col-md-4" ng-class="{'dark' : showmeLight}">
+                <div class="thumbnail" ng-class="{'dark' : showmeLight}">
+                    <h3 ng-class="{'dark' : showmeLight}">Max Local Players:</h3>
+                    <p id="GameMax_Local_Players" ng-class="{'dark' : showmeLight}">
+                        {{myGamesList[$rootScope.itemId].max_local_players}}
+                    </p>
+                    <h3 ng-class="{'dark' : showmeLight}">CoOp Story Mode?:</h3>
+                    <p id="GameCoOp" ng-class="{'dark' : showmeLight}">
+                        {{myGamesList[$rootScope.itemId].coop_TF}}
+                    </p>
+                    <h3 ng-class="{'dark' : showmeLight}">Online Mode?:</h3>
+                    <p id="GameOnline" ng-class="{'dark' : showmeLight}">
+                        {{myGamesList[$rootScope.itemId].online_TF}}
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-sm-4 col-lg-4 col-md-4" ng-class="{'dark' : showmeLight}">
+                <div class="thumbnail" ng-class="{'dark' : showmeLight}">
+                    <h3 ng-class="{'dark' : showmeLight}">Price:</h3>
+                    <p class="GamePrice" ng-class="{'dark' : showmeLight}">
+                        {{myGamesList[$rootScope.itemId].price}}
+                    </p>
+                    <h3 ng-class="{'dark' : showmeLight}">Subscription?:</h3>
+                    <p id="GameSubscription" ng-class="{'dark' : showmeLight}">
+                        {{myGamesList[$rootScope.itemId].subscription_TF}}
+                    </p>
+                    <h3 ng-class="{'dark' : showmeLight}">Platform:</h3>
+                    <p id="GamePlatform" ng-class="{'dark' : showmeLight}">
+                        {{getPlatform(myGamesList[$rootScope.itemId])}}
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-12" ng-class="{'dark' : showmeLight}">
+                <h3 ng-class="{'dark' : showmeLight}">Description:</h3>
+                <p id = "GameDescription" ng-class="{'dark' : showmeLight}">
+                    {{myGamesList[$rootScope.itemId].description}}
+                </p>
+            </div>
+
+
+            <div class="col-md-12">
+                <button ng-click="addToCart(myGamesList[$rootScope.itemId])" id="addToCartButton" class="pull-right">Add To Cart</button>
+
+                <h4 class="pull-right GamePrice" style="font-size: 20px">{{myGamesList[$rootScope.itemId].price}} &nbsp</h4>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</section>

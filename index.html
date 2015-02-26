@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+<head lang="en">
+    <script src="lib/jquery-1.11.2.min.js"></script>
+    <script  src="lib/jquery-ui.min.js"></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <link data-require="animate.css@*" data-semver="3.2.0" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" />
+    <script data-require="angular.js@*" data-semver="1.4.0-beta.4" src="https://code.angularjs.org/1.4.0-beta.4/angular.js"></script>
+    <script data-require="angular-animate@*" data-semver="1.4.0-beta.4" src="https://code.angularjs.org/1.4.0-beta.4/angular-animate.js"></script>
+
+    <title>Marek's Online Game Shop</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/shop-homepage.css" rel="stylesheet">
+
+    <!--animate.css-->
+    <link rel="stylesheet" href="css/animate.css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-class="{'dark' : showmeLight}">
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!--container within top nav bar-->
+    <div class="container">
+        <div class="navbar-header animated" id="logo">
+            <!--Site Name and Home Logo-->
+            <a id="TopNav" class="navbar-brand" href="#home" style="color: #FFFFFF"><img id="homeGlyph" src="images/glyphIconHomeV2.png"><span id="shopTopName">&nbsp; Marek's Online Game Shop</span></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#home"><img id="aboutGlyph" src="images/glyphIconAbout.png">&nbsp; About</a>
+                </li>
+                <li>
+                    <a href="#home"><img id="servicesGlyph" src="images/glyphIconServices.png">&nbsp; Analytics</a>
+                </li>
+                <li>
+                    <a href="#home"><img id="contactGlyph" src="images/glyphIconContact.png">&nbsp; Contact</a>
+                </li>
+            </ul>
+
+
+
+            <p id="logOutButton" class="pull-right" ng-click="showme=false" ng-show="showme">Log Out</p>
+            <a id="myCartButton" class="pull-right" href="#/myCart" ng-show="showme"> <img id="shoppingCartGlyph" src="images/glyphIconShoppingCartV2.png" alt=""/>&nbsp; My Cart ({{cartArray.length}})</a>
+
+
+            <p id="logInButton" class="pull-right" ng-click="showme=true" ng-hide="showme">Log In</p>
+            <div id="LogInDiv" class="pull-right" style="color: #FFFFFF" ng-hide="showme">
+                <img id="logInGlyph" src="images/glyphIconLogIn.png">
+                <input style="width: 100px" type="text" placeholder="Username"/>
+             <input style="width: 100px" type="text" placeholder="Password"/>
+            </div>
+
+
+            <img id="lightBulbOff" class="lightBulbGlyph pull-right" ng-click="showmeLight=true" ng-hide="showmeLight" src="images/lightOff.png" alt=""/>
+            <img id="lightBulbOn" class="lightBulbGlyph pull-right" ng-click="showmeLight=false" ng-show="showmeLight" src="images/lightOn.png" alt=""/>
+
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!--<div class="row">-->   <!--REMOVED ROW SO THAT PARTIALS WOULD BE TO THE RIGHT, NOT UNDERNEATH-->
+
+        <div class="col-md-3">
+
+            <h2 ng-click="searchVar.category=''" style="font-family: pacificoregular; color: #0c97e2"><a id="GameGenresSideNav" href="#/All_Games" style="color: #0c97e2">Game Genres</a></h2>
+
+            <!-- Start css3menu.com BODY section -->
+            <input type="checkbox" id="css3menu-switcher" class="c3m-switch-input">
+            <ul id="css3menu1" class="topmenu">
+                <li class="switch"><label onclick="" for="css3menu-switcher"></label></li>
+                <li class="topfirst"><a id = "MOBACategorySideNav" href="#/MOBA_Games" style="width:170px;"><span><img src="./images/blue-arrow2 right.png" alt="">MOBA</span></a>
+                    <ul>
+                        <li><a ng-click="$rootScope.itemId = 0" id ="LoLSideNav" href="#details/0">League of Legends</a></li>
+                        <li><a ng-click="$rootScope.itemId = 1" id ="DOTA2SideNav" href="#details/1">DOTA 2</a></li>
+                        <li><a ng-click="$rootScope.itemId = 2" id ="HoNSideNav" href="#details/2">Heroes of Newerth</a></li>
+                        <li><a ng-click="$rootScope.itemId = 3" id ="HotSSideNav" href="#details/3">Heroes of the Storm</a></li>
+                    </ul></li>
+                <li class="topmenu"><a id = "StrategyCategorySideNav" href="#/Strategy_Games" style="width:170px;"><span><img src="./images/blue-arrow2 right.png" alt="">Strategy</span></a>
+                    <ul>
+                        <li><a ng-click="$rootScope.itemId = 4" id ="SCIISideNav" href="#details/4">StarCraft II</a></li>
+                        <li><a ng-click="$rootScope.itemId = 5" id ="WarcraftIIISideNav" href="#details/5">Warcraft III</a></li>
+                        <li><a ng-click="$rootScope.itemId = 6" id ="CnC4SideNav" href="#details/6">Command and Conquer 4</a></li>
+                    </ul></li>
+                <li class="topmenu"><a id = "MMORPGCategorySideNav" href="#/MMORPG_Games" style="width:170px;"><span><img src="./images/blue-arrow2 right.png" alt="">MMORPG</span></a>
+                    <ul>
+                        <li><a ng-click="$rootScope.itemId = 7" id ="WoWSideNav" href="#details/7">World of Warcraft</a></li>
+                        <li><a ng-click="$rootScope.itemId = 8" id ="RunescapeSideNav" href="#details/8">Runescape</a></li>
+                        <li><a ng-click="$rootScope.itemId = 9" id ="WildStarSideNav" href="#details/9">WildStar</a></li>
+                        <li><a ng-click="$rootScope.itemId = 10" id ="ESOSideNav" href="#details/10">Elder Scrolls Online</a></li>
+                    </ul></li>
+                <li class="topmenu"><a id = "RPGCategorySideNav" href="#/RPG_Games" style="width:170px;"><span><img src="./images/blue-arrow2 right.png" alt="">RPG </span></a>
+                    <ul>
+                        <li><a ng-click="$rootScope.itemId = 11" id ="SkyrimSideNav" href="#details/11">The Elder Scrolls V: Skyrim</a></li>
+                        <li><a ng-click="$rootScope.itemId = 12" id ="DAISideNav" href="#details/12">Dragon Age: Inquisition</a></li>
+                        <li><a ng-click="$rootScope.itemId = 13" id ="DarkSoulsIISideNav" href="#details/13">Dark Souls II</a></li>
+                        <li><a ng-click="$rootScope.itemId = 14" id ="DiabloIIISideNav" href="#details/14">Diablo III</a></li>
+                        <li><a ng-click="$rootScope.itemId = 15" id ="ME3SideNav" href="#details/15">Mass Effect 3</a></li>
+                    </ul></li>
+                <li class="topmenu"><a id = "Action_AdventureCategorySideNav" href="#/Action_and_Adventure_Games" style="width:170px;"><span><img src="./images/blue-arrow2 right.png" alt="">Action &amp; Adventure</span></a>
+                    <ul>
+                        <li><a ng-click="$rootScope.itemId = 16" id ="GTAVSideNav" href="#details/16">Grand Theft Auto V</a></li>
+                        <li><a ng-click="$rootScope.itemId = 17" id ="DayZSideNav" href="#details/17">DayZ</a></li>
+                        <li><a ng-click="$rootScope.itemId = 18" id ="BioShockSideNav" href="#details/18">BioShock: Infinite</a></li>
+                        <li><a ng-click="$rootScope.itemId = 19" id ="MagickaSideNav" href="#details/19">Magicka</a></li>
+                    </ul></li>
+                <li class="topmenu"><a id = "ShooterCategorySideNav" href="#/Shooter_Games" style="width:170px;"><span><img src="./images/blue-arrow2 right.png" alt="">Shooter</span></a>
+                    <ul>
+                        <li><a ng-click="$rootScope.itemId = 20" id ="TF2SideNav" href="#details/20">Team Fortress 2</a></li>
+                        <li><a ng-click="$rootScope.itemId = 21" id ="CoDSideNav" href="#details/21">Call of Duty: Advanced Warfare</a></li>
+                        <li><a ng-click="$rootScope.itemId = 22" id ="BF4SideNav" href="#details/22">Battlefield 4</a></li>
+                    </ul></li>
+                <li class="topmenu"><a id = "IndieCategorySideNav" href="#/Indie_Games" style="width:170px;"><span><img src="./images/blue-arrow2 right.png" alt="">Indie</span></a>
+                    <ul>
+                        <li><a ng-click="$rootScope.itemId = 23" id ="BroforceSideNav" href="#details/23">Broforce</a></li>
+                        <li><a ng-click="$rootScope.itemId = 24" id ="HotlineMiamiSideNav" href="#details/24">Hotline Miami</a></li>
+                        <li><a ng-click="$rootScope.itemId = 25" id ="DivekickSideNav" href="#details/25">Divekick</a></li>
+                    </ul></li>
+                <li class="topmenu"><a id = "Sports_RacingCategorySideNav" href="#/Sports_and_Racing_Games" style="width:170px;"><span><img src="./images/blue-arrow2 right.png" alt="">Sports &amp; Racing</span></a>
+                    <ul>
+                        <li><a ng-click="$rootScope.itemId = 26" id ="FIFA15SideNav" href="#details/26">FIFA 15</a></li>
+                        <li><a ng-click="$rootScope.itemId = 27" id ="SpeedRunnersSideNav" href="#details/27">SpeedRunners</a></li>
+                        <li><a ng-click="$rootScope.itemId = 28" id ="F12013SideNav" href="#details/28">F1 2013</a></li>
+                        <li><a ng-click="$rootScope.itemId = 29" id ="NBA2K15SideNav" href="#details/29">NBA 2K15</a></li>
+                    </ul></li>
+                <li class="toplast"><a id = "SimulationCategorySideNav" href="#/Simulation_Games" style="width:170px;"><span><img src="./images/blue-arrow2 right.png" alt="">Simulation</span></a>
+                    <ul>
+                        <li><a ng-click="$rootScope.itemId = 30" id ="Arma3SideNav" href="#details/30">Arma 3</a></li>
+                        <li><a ng-click="$rootScope.itemId = 31" id ="RCT3SideNav" href="#details/31">RollerCoaster Tycoon 3</a></li>
+                        <li><a ng-click="$rootScope.itemId = 32" id ="GoatSimulatorSideNav" href="#details/32">Goat Simulator</a></li>
+                    </ul></li>
+                <!-- End css3menu.com BODY section -->
+
+            </ul>
+
+
+
+        </div>
+
+
+    <!--</div>-->
+    <div class="col-md-9" ng-view></div>
+
+</div>
+
+<img id="toTopArrow" src="images/uparrowgradientleast.png" alt=""/>
+
+
+
+
+
+<!-- /.container -->
+
+<div class="container">
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Marek Schmidt 2015</p>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<!-- /.container -->
+
+
+</body>
+<!-- Bootstrap Core JavaScript -->
+<script src="lib/bootstrap.min.js"></script>
+<!-- AngularJS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+<!-- Firebase -->
+<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/0.9.2/angularfire.min.js"></script>
+<!--Sortable-->
+<script src="lib/sortable.js"></script>
+<!--app.js-->
+<script src="js/app.js"></script>
+<!--animation-->
+<script src="js/animations.js"></script>
+<!--filters.js-->
+<script src="js/filters.js"></script>
+<!--controllers.js-->
+<script src="js/controllers.js"></script>
+<!--routing-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-route.min.js"></script>
+<!--Angular-Animate-->
+<script src="lib/bootstrap.min.js"></script>
+</html>

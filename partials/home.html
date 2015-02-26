@@ -1,0 +1,76 @@
+<section class="homePage">
+
+    <h1 id="CategoryName" style="font-family: pacificoregular; color: #0c97e2; text-align: center">Featured Games</h1>
+    <br>
+
+
+
+    <div id="featuredGamesDiv" class="row carousel-holder">
+
+        <div class="col-md-12">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img class="slide-image" src="images/leagueoflegendslarge.png" alt="">
+                    </div>
+                    <div class="item">
+                        <img class="slide-image" src="images/gta5large.jpg" alt="">
+                    </div>
+                    <div class="item">
+                        <img  class="slide-image" src="images/hotlinemiamilarge.jpg" alt="">
+                    </div>
+                </div>
+                <a class="left carousel-control" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div>
+
+
+        <div id="salesGames" class="row">
+
+            <h3 id="specialSales" style="font-family: pacificoregular; color: #0c97e2; text-align: center">Special Sales!</h3>
+
+            <div class="blankSpace"></div>
+
+
+
+            <div ng-repeat="newGame in myRandomGamesList">
+
+
+                <div class="col-sm-4 col-lg-4 col-md-4" ng-class="{'dark' : showmeLight}">
+                    <div class="thumbnail" ng-class="{'dark' : showmeLight}">
+                        <div>
+                            <img src="{{newGame.thumbnail}}" alt="">
+                        </div>
+                        <div class="caption" ng-class="{'dark' : showmeLight}">
+                            <h4 class="pull-right" ng-class="{'dark' : showmeLight}">&nbsp  {{'$' + ((newGame.price | priceStringToFloat)/2).toFixed(2)}}</h4>
+                            <h4 style="text-decoration: line-through; font-size: 12px" class="pull-right" ng-class="{'dark' : showmeLight}">{{newGame.price}}</h4>
+                            <h4 ng-class="{'dark' : showmeLight}"><a ng-style="{'font-size': salesNameSize((newGame.name | removeSubName).length)}" class="categoryGameName" href="#details/{{myGamesList.indexOf(newGame)}}">{{newGame.name | removeSubName}}</a>
+                            </h4>
+                            <p ng-class="{'dark' : showmeLight}">{{newGame.description}}</p>
+                        </div>
+                        <div id="ratingDiv" style="padding-left: 8px; padding-right: 8px; padding-bottom: 5px;" ng-class="{'dark' : showmeLight}">
+                            <div style="display: inline-block" ng-bind-html="getTrustedHtml(newGame)"></div>
+                            <p class="pull-right" style="color: #d17581" ng-class="{'dark' : showmeLight}">{{newGame.numberReviews}} reviews</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
