@@ -4,6 +4,8 @@
 
 var gameControllers = angular.module('gameControllers', ['firebase']);
 
+
+
 gameControllers.controller('CategoryController', ['$rootScope', '$scope', '$firebase', '$http', '$sce', function($rootScope, $scope, $firebase, $http, $sce) {
 
     var ref = new Firebase("https://angularprojectpos.firebaseio.com");
@@ -162,9 +164,6 @@ gameControllers.controller('CategoryController', ['$rootScope', '$scope', '$fire
 }]);
 
 
-
-
-
 gameControllers.controller('DetailsController', ['$rootScope', '$scope', '$http', '$routeParams', '$firebase', function($rootScope, $scope, $http, $routeParams, $firebase) {
 
     var ref = new Firebase("https://angularprojectpos.firebaseio.com");
@@ -267,7 +266,6 @@ gameControllers.controller('DetailsController', ['$rootScope', '$scope', '$http'
 
 
 }]);
-
 
 
 gameControllers.controller('HomeController', ['$rootScope', '$scope', '$http', '$routeParams', '$firebase', function($rootScope, $scope, $http, $routeParams, $firebase) {
@@ -391,6 +389,30 @@ gameControllers.controller('HomeController', ['$rootScope', '$scope', '$http', '
         else {
             return urlPart;
         }
+    };
+
+    $scope.getTrustedHtml = function(game) {
+        // get the game HTML
+        var html = $scope.getStars(game);
+        // Return it as trusted HTML for ngBindHtml
+        return $sce.trustAsHtml(html);
+    };
+
+
+
+    $scope.getStars = function(game) {
+        var numStars = (game.numberStars);
+        iconString = '';
+        for (i=0; i<Math.floor(numStars); i++) {
+            iconString += '<img style="width:16px" class="starGlyph" src="images/fullStar.png" alt=""/>'
+        }
+        if (numStars%1 == 0.5) {
+            iconString += '<img style="width:16px" class="starGlyph" src="images/halfStar.png" alt=""/>'
+        }
+        for (j=0; j<(5-Math.ceil(numStars)); j++) {
+            iconString += '<img style="width:16px" class="starGlyph" src="images/emptyStar.png" alt=""/>'
+        }
+        return iconString;
     };
 }]);
 
